@@ -1,7 +1,25 @@
 main{
+    height: 100vh;
+    background-color: #0f002e;
+}
+
+.rounded-bg{
+    background-color: #fff;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background-color: blue;
+    padding: 10px;
+}
+
+.test-colors{
+    color: #000000
+    #0f002e
+    #190249
+    #681cff
+    #ffffff;
+
+
 }
