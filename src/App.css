@@ -14,6 +14,17 @@ main{
     padding: 10px;
 }
 
+.rounded-bg:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: all 0.5s;
+}
+
+.rounded-bg:not(:hover){
+    transform: scale(1);
+    transition: all 0.5s;
+}
+
 .test-colors{
     color: #000000
     #0f002e
