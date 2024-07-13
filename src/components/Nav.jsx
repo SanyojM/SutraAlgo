@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Nav() {
   return (
@@ -6,9 +7,9 @@ export default function Nav() {
       <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
           <div className="nav-left">
-            <a class="navbar-brand" href="#">
+            <Link to="/" class="navbar-brand">
               SutraAlgo
-            </a>
+            </Link>
             <button
               class="navbar-toggler"
               type="button"
@@ -24,34 +25,34 @@ export default function Nav() {
           <div class="collapse d-flex justify-content-center navbar-collapse nav-middle" id="navbarNav">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">
+                <Link class="nav-link active" aria-current="page" to="/practice">
                   Practice
-                </a>
+                </Link>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <Link class="nav-link" to="/assignment">
                   Assignment
-                </a>
+                </Link>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <Link class="nav-link" to="/certify">
                   Certify
-                </a>
+                </Link>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <Link class="nav-link" to="/contest">
                   Contest
-                </a>
+                </Link>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <Link class="nav-link" to="/store">
                   Store
-                </a>
+                </Link>
               </li>
               <li class="nav-item">
-                <a class="nav-link " aria-disabled="true">
+                <Link class="nav-link" to="/contribute">
                   Contribute
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
