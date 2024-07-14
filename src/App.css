@@ -1,5 +1,5 @@
 main{
-    height: 100vh;
+    /* height: 100vh; */
     background-color: #0f002e;
 }
 
@@ -12,6 +12,10 @@ main{
     justify-content: center;
     align-items: center;
     padding: 10px;
+}
+
+.blue-bg{
+    background-color: #190249 !important;
 }
 
 .rounded-bg:hover{
