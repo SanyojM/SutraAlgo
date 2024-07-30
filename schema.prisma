@@ -18,39 +18,44 @@ model User {
     contact_no String @unique
     role String
     questions_attempted Question[] @relation("attempted")
+    questions       Question[]  @relation("UserQuestions")
     certifications String?
     created_at DateTime @default(now())
     updated_at DateTime @updatedAt
+    admin Admin?
+    solved          Question[]  @relation("solved")
+    feedbacks       Feedback[] @relation("UserFeedback")
 }
 
 model Admin{
     id Int @id @default(autoincrement())
     admin User @relation(fields: [adminId], references: [id])
-    adminId Int
+    adminId Int @unique
 }
 
-model TestCases{
-    id Int @id @default(autoincrement())
-    input String
-    output String
-    question_id Int
+model TestCases {
+  id          Int      @id @default(autoincrement())
+  input       String
+  output      String
+  question    Question @relation(fields: [question_id], references: [id], name: "QuestionTestCases")
+  question_id Int
 }
 
 model Question {
-    id    Int    @id @default(autoincrement())
-    question_title String
-    question_description String
-    question_lang String
-    question_difficulty String
-    question_points Int
-    question_testcases TestCases[]
-    question_author User @relation(fields: [authorId], references: [id])
-    authorId Int
-    attempted_by User[] @relation("attempted")
-    solved_by User[] @relation("solved")
-    submissions Submission[]
-    created_at DateTime @default(now())
-    updated_at DateTime @updatedAt
+  id                    Int         @id @default(autoincrement())
+  question_title        String
+  question_description  String
+  question_lang         String
+  question_difficulty   String
+  question_points       Int
+  question_testcases    TestCases[] @relation("QuestionTestCases")
+  question_author       User        @relation(fields: [authorId], references: [id], name: "UserQuestions")
+  authorId              Int
+  attempted_by          User[]      @relation("attempted")
+  solved_by             User[]      @relation("solved")
+  submissions           Submission[]
+  created_at            DateTime    @default(now())
+  updated_at            DateTime    @updatedAt
 }
 
 model Submission {
@@ -62,6 +67,8 @@ model Submission {
     submission_language String
     submission_question_id Int
     submission_user_id Int
+    question    Question  @relation(fields: [questionId], references: [id])
+    questionId  Int
     created_at DateTime @default(now())
     updated_at DateTime @updatedAt
 }
@@ -71,7 +78,7 @@ model Feedback {
     question_id Int
     feedback_title String
     feedback_description String
-    feedback_author User @relation(fields: [authorId], references: [id])
+    feedback_author User @relation(fields: [authorId], references: [id], name: "UserFeedback")
     authorId Int
     created_at DateTime @default(now())
     updated_at DateTime @updatedAt
