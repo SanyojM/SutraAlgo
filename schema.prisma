@@ -1,0 +1,91 @@
+generator client{
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("SERVICE_URI")
+}
+
+model User {
+    id    Int    @id @default(autoincrement())
+    name  String
+    username String @unique
+    bio String?
+    profile_pic String?
+    email String @unique
+    password String
+    contact_no String @unique
+    role String
+    questions_attempted Question[] @relation("attempted")
+    certifications String?
+    created_at DateTime @default(now())
+    updated_at DateTime @updatedAt
+}
+
+model Admin{
+    id Int @id @default(autoincrement())
+    admin User @relation(fields: [adminId], references: [id])
+    adminId Int
+}
+
+model TestCases{
+    id Int @id @default(autoincrement())
+    input String
+    output String
+    question_id Int
+}
+
+model Question {
+    id    Int    @id @default(autoincrement())
+    question_title String
+    question_description String
+    question_lang String
+    question_difficulty String
+    question_points Int
+    question_testcases TestCases[]
+    question_author User @relation(fields: [authorId], references: [id])
+    authorId Int
+    attempted_by User[] @relation("attempted")
+    solved_by User[] @relation("solved")
+    submissions Submission[]
+    created_at DateTime @default(now())
+    updated_at DateTime @updatedAt
+}
+
+model Submission {
+    id    Int    @id @default(autoincrement())
+    submission_code String
+    submission_output String
+    submission_status String
+    submission_points Int
+    submission_language String
+    submission_question_id Int
+    submission_user_id Int
+    created_at DateTime @default(now())
+    updated_at DateTime @updatedAt
+}
+
+model Feedback {
+    id    Int    @id @default(autoincrement())
+    question_id Int
+    feedback_title String
+    feedback_description String
+    feedback_author User @relation(fields: [authorId], references: [id])
+    authorId Int
+    created_at DateTime @default(now())
+    updated_at DateTime @updatedAt
+}
+
+model UserCertifications{
+    id Int @id @default(autoincrement())
+    certification_name String
+    certification_authority String
+    certification_license String
+    certification_url String
+    certification_date DateTime
+    certification_expiry DateTime
+    certification_user_id Int
+    created_at DateTime @default(now())
+    updated_at DateTime @updatedAt
+}
